@@ -1,0 +1,14 @@
+Comandos MYSQL:
+
+CREATE DATABASE list_of_contacts;
+USE list_of_contacts;
+CREATE TABLE contact(
+	id INT NOT NULL AUTO_INCREMENT,
+	name VARCHAR(50) NULL,
+	phone VARCHAR(20) NULL,
+	PRIMARY KEY (id)
+);
+SELECT * FROM contact;
+
+
+
