@@ -12,12 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
-import connection.Key;
+
 public class ContactRepository {
-	
-	public static void save(Key key, Contact contact) {
+	public static void save(Contact contact) {
 		 String sql = "INSERT INTO contact (name, phone) VALUES ('"+contact.getName()+"', '"+contact.getPhone()+"')";
-		 Connection connection = ConnectionFactory.connection(key);
+		 Connection connection = ConnectionFactory.connection();
 		 try {
 			 Statement statement = connection.createStatement();
 			 statement.executeLargeUpdate(sql);
@@ -27,9 +26,9 @@ public class ContactRepository {
 			 e.printStackTrace();
 		 }
 	}	 
-	public static List<Contact> getAllContacts(Key key){
+	public static List<Contact> getAllContacts(){
 		String sql = "SELECT id, name, phone FROM contact";
-		Connection connection = ConnectionFactory.connection(key);
+		Connection connection = ConnectionFactory.connection();
 		List<Contact> listOfContacts = new ArrayList<>();
 		try {
 			Statement statement = connection.createStatement();
@@ -45,10 +44,10 @@ public class ContactRepository {
 		}
 		return null;
 	}	
-	public static void update(Key key, int id, Contact contact) {
+	public static void update(int id, Contact contact) {
 		String sql1 = "UPDATE contact SET name = '"+contact.getName()+"' WHERE id = '"+id+"'";	
 		String sql2 = "UPDATE contact SET phone = '"+contact.getPhone()+"' WHERE id = '"+id+"'";
-		Connection connection = ConnectionFactory.connection(key);
+		Connection connection = ConnectionFactory.connection();
 		try {
 			Statement statement = connection.createStatement();
 			statement.executeUpdate(sql1);
@@ -59,9 +58,9 @@ public class ContactRepository {
 			e.printStackTrace();
 		}
 	}	
-	public static void delete(Key key, int id) {
+	public static void delete(int id) {
 		String sql = "DELETE FROM contact WHERE id='"+id+"'";
-		Connection connection = ConnectionFactory.connection(key);
+		Connection connection = ConnectionFactory.connection();
 		try {
 			Statement statement = connection.createStatement();
 			statement.executeUpdate(sql);

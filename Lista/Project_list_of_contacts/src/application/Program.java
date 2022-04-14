@@ -1,6 +1,5 @@
 package application;
 
-import visual.LoginWindow;
 
 public class Program {
 	public static void main(String[] args) {
@@ -11,7 +10,6 @@ public class Program {
 		//for(Contact contact : listOfContact) {
 		//	System.out.println(contact.getId()+") Nome: "+contact.getName()+" --> Contato: "+contact.getPhone());
 		//}
-		new LoginWindow();
 	}
 }
  
