@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import entities.Contact;
 import repository.ContactRepository;
@@ -49,7 +50,8 @@ public class MainWindow extends JFrame implements ActionListener {
     
     private void updateToDB(){
 			indexList=0;
-	        List<Contact> listOfContacts = ContactRepository.getAllContacts(); 
+	        List<Contact> listOfContacts = ContactRepository.getAllContacts();
+	        Collections.sort(listOfContacts);
 	        listOfContactsView.clear();
 	        for(Contact contact: listOfContacts){
 	            listOfContactsView.add(new ObjContactWindow(indexList, contact.getId(), contact.getName(), contact.getPhone()));

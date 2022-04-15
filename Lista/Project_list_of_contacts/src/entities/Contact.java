@@ -2,7 +2,7 @@ package entities;
 
 import java.util.Objects;
 
-public class Contact {
+public class Contact implements Comparable<Contact>{
 	private int id=0;
 	private String name;
 	private String phone;
@@ -57,6 +57,11 @@ public class Contact {
 			return false;
 		Contact other = (Contact) obj;
 		return Objects.equals(name, other.name);
+	}
+	
+	@Override
+	public int compareTo(Contact contact) {
+		return this.name.compareTo(contact.getName());
 	}
 	
 }
