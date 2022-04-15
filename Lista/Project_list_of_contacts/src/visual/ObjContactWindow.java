@@ -1,42 +1,49 @@
 package visual;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import entities.Contact;
 
 public class ObjContactWindow extends JButton implements ActionListener{
-
-	 private Color backgroundJText = new Color(105,105,105);
 	   
-	    private JLabel labelTitle = new JLabel();
+	    private static final long serialVersionUID = 1L;
+		private JLabel labelTitle = new JLabel();
 	    private JLabel labelIndex = new JLabel();
 	    protected JButton btnEdit = new JButton();
 	    protected JButton btnDelete = new JButton();
-	    private String name;
-	    private String phone;
-	    private boolean delete;
-	    private boolean editar;
+	    private boolean delete = false;
+	    private boolean editar = false;
 	    private int idLocal = 0;
+	    private int idDB = 0;
 
 	    @Override
 	    public void actionPerformed(ActionEvent actionEvent) {
-	        
+	        if(actionEvent.getSource()==btnDelete){
+	            this.delete = true;
+	        }
+	        if(actionEvent.getSource()==btnEdit){
+	            this.editar = true;
+	        }   	
 	    }
-	
-	
-	public ObjContactWindow(int y, Contact contact){
-       
-        btnDelete.setBounds(500,1,30,30);
+	    
+	public ObjContactWindow(int y, int idDB, String name, String phone){
+		
+		this.idLocal = y;
+        this.idDB = idDB;
+        
+        btnDelete.setBounds(552,-8,50,50);
+        btnDelete.setText("X");
         btnDelete.setBackground(new Color(105,105,105));
         btnDelete.setBorderPainted(false);
         btnDelete.addActionListener(this);
         add(btnDelete);
 
-        btnEdit.setBounds(532,1,30,30);
+        btnEdit.setBounds(500,-9,50,50);
         btnEdit.setBackground(new Color(105,105,105));
+        btnEdit.setText("E");
         btnEdit.setBorderPainted(false);
         btnEdit.addActionListener(this);
         add(btnEdit);
@@ -51,12 +58,35 @@ public class ObjContactWindow extends JButton implements ActionListener{
         labelIndex.setText(""+(y+1));
         add(labelIndex);
 
+        addActionListener(this);
         setLayout(null);
         setBounds(0, 2+(y*32),600,30);
         setBorder(new LineBorder(new Color(105,105,105), 2));
         setBackground(new Color(105,105,105));
-        addActionListener(this);
         repaint();
     }
+	
+	public boolean isDelete() {
+		return delete;
+	}
+	public void setDelete(boolean delete) {
+		this.delete = delete;
+	}
+	public boolean isEditar() {
+		return editar;
+	}
+	public void setEditar(boolean editar) {
+		this.editar = editar;
+	}
+	public int getIdLocal() {
+		return idLocal;
+	}
+	public void setIdLocal(int idLocal) {
+		this.idLocal = idLocal;
+	}
+	
+	public int getIdDB() {
+		return this.idDB;
+	}
 	
 }

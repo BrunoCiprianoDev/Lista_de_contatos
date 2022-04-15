@@ -5,6 +5,13 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import entities.Contact;
+import repository.ContactRepository;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 
 public class MainWindow extends JFrame implements ActionListener {
 
@@ -12,15 +19,42 @@ public class MainWindow extends JFrame implements ActionListener {
     private JScrollPane scrollPane;
     private JToolBar header = new JToolBar();
     private JButton btnAdicionar = new JButton("Adicionar");
-	
+	private List<ObjContactWindow> listOfContactsView = new ArrayList();
+    private int indexList=0;
+    
     @Override
     public void actionPerformed(ActionEvent event){
         if(event.getSource()==btnAdicionar){
            
         }
     }
-	
+    
+    private void updateToDB(){
+			int indexList=0;
+	        List<Contact> listOfContacts = ContactRepository.getAllContacts();
+	        listOfContactsView.clear(); 
+	        for(Contact contact: listOfContacts){
+	            listOfContactsView.add(new ObjContactWindow(indexList, contact.getId(), contact.getName(), contact.getPhone()));
+	            painel.add(listOfContactsView.get(indexList));
+	            listOfContactsView.get(indexList).btnDelete.addMouseListener(
+	                    new MouseAdapter() {
+	                        public void mouseReleased(MouseEvent e) {
+	                            //verifyItemsListDelete();
+	                        }
+	                    });
+	            listOfContactsView.get(indexList).btnEdit.addMouseListener(
+	                    new MouseAdapter() {
+	                        public void mouseReleased(MouseEvent e) {
+	                            //verifyItemsListEdit();
+	                        }
+	                    });
+	            ++indexList;
+	        }
+	        repaint();
+	}	
+        	
 	public MainWindow() {
+			updateToDB();
 		    btnAdicionar.setBounds(0,0,100,20);
 	        btnAdicionar.setBackground(new Color(105,105,105));
 	        btnAdicionar.setForeground(new Color(220,220,200));
