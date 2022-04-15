@@ -15,11 +15,12 @@ import java.awt.event.MouseEvent;
 
 public class MainWindow extends JFrame implements ActionListener {
 
-    private JPanel painel = new JPanel();
+    private static final long serialVersionUID = 1L;
+	private JPanel painel = new JPanel();
     private JScrollPane scrollPane;
     private JToolBar header = new JToolBar();
     private JButton btnAdicionar = new JButton("Adicionar");
-	private List<ObjContactWindow> listOfContactsView = new ArrayList();
+	private List<ObjContactWindow> listOfContactsView = new ArrayList<>();;
     private int indexList=0;
     
     @Override
@@ -29,17 +30,23 @@ public class MainWindow extends JFrame implements ActionListener {
         }
     }
     
+    private void updatePainel() {
+    	painel.removeAll();
+    	repaint();
+    	updateToDB();
+    }
+    
     private void updateToDB(){
 			int indexList=0;
-	        List<Contact> listOfContacts = ContactRepository.getAllContacts();
-	        listOfContactsView.clear(); 
+	        List<Contact> listOfContacts = ContactRepository.getAllContacts(); 
+	        listOfContactsView.clear();
 	        for(Contact contact: listOfContacts){
 	            listOfContactsView.add(new ObjContactWindow(indexList, contact.getId(), contact.getName(), contact.getPhone()));
 	            painel.add(listOfContactsView.get(indexList));
 	            listOfContactsView.get(indexList).btnDelete.addMouseListener(
 	                    new MouseAdapter() {
 	                        public void mouseReleased(MouseEvent e) {
-	                            //verifyItemsListDelete();
+	                            verifyItemsListDelete();
 	                        }
 	                    });
 	            listOfContactsView.get(indexList).btnEdit.addMouseListener(
@@ -51,8 +58,35 @@ public class MainWindow extends JFrame implements ActionListener {
 	            ++indexList;
 	        }
 	        repaint();
-	}	
-        	
+	}
+    
+    private void verifyItemsListDelete(){
+        for(ObjContactWindow objContactWindow : listOfContactsView){
+            boolean delete = objContactWindow.isDelete();
+            if(delete){
+                for(int i=0; i<(indexList-1); i++){
+                    listOfContactsView.get(i).setDelete(false);
+                }
+                DeletePane deletePane = new DeletePane();
+                deletePane.btnConfirmar.addMouseListener(
+                        new MouseAdapter() {
+                            public void mouseReleased(MouseEvent e) {
+                                ContactRepository.delete(objContactWindow.getIdDB());
+                                deletePane.dispose();
+                                updatePainel();
+                            }
+                        });
+                deletePane.btnNegar.addMouseListener(
+                        new MouseAdapter() {
+                            public void mouseReleased(MouseEvent e) {
+                                deletePane.dispose();
+                                updatePainel();
+                            }
+                        });
+            }
+        }
+    }
+    
 	public MainWindow() {
 			updateToDB();
 		    btnAdicionar.setBounds(0,0,100,20);
