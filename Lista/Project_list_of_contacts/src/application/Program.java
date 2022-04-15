@@ -1,5 +1,10 @@
 package application;
 
+//import repository.ContactRepository;
+//import java.util.List;
+//import entities.Contact;
+
+import visual.MainWindow;
 
 public class Program {
 	public static void main(String[] args) {
@@ -10,6 +15,7 @@ public class Program {
 		//for(Contact contact : listOfContact) {
 		//	System.out.println(contact.getId()+") Nome: "+contact.getName()+" --> Contato: "+contact.getPhone());
 		//}
+		new MainWindow();
 	}
 }
  
