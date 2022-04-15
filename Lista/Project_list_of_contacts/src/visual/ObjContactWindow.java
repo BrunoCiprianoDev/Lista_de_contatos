@@ -14,8 +14,8 @@ public class ObjContactWindow extends JButton implements ActionListener{
 	    private JLabel labelIndex = new JLabel();
 	    protected JButton btnEdit = new JButton();
 	    protected JButton btnDelete = new JButton();
-	    private boolean delete = false;
-	    private boolean edit = false;
+	    private boolean delete;
+	    private boolean edit;
 	    private String name;
 	    private String phone;
 	    private int idLocal = 0;
@@ -36,6 +36,8 @@ public class ObjContactWindow extends JButton implements ActionListener{
 		this.phone = phone;
 		this.idLocal = y;
         this.idDB = idDB;
+        this.delete = false;
+        this.edit = false;
         
         btnDelete.setBounds(552,-8,50,50);
         btnDelete.setText("X");
@@ -76,7 +78,7 @@ public class ObjContactWindow extends JButton implements ActionListener{
 		this.delete = delete;
 	}
 	public boolean isEdit() {
-		return edit;
+		return this.edit;
 	}
 	public void setEdit(boolean editar) {
 		this.edit = editar;
@@ -93,13 +95,11 @@ public class ObjContactWindow extends JButton implements ActionListener{
 	}
 
 	public String getPhone() {
-		return phone;
+		return this.phone;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public String getName() {
+		return this.name;
 	}
-	
-	
 	
 }

@@ -37,7 +37,7 @@ public class MainWindow extends JFrame implements ActionListener {
     }
     
     private void updateToDB(){
-			int indexList=0;
+			indexList=0;
 	        List<Contact> listOfContacts = ContactRepository.getAllContacts(); 
 	        listOfContactsView.clear();
 	        for(Contact contact: listOfContacts){
@@ -52,7 +52,7 @@ public class MainWindow extends JFrame implements ActionListener {
 	            listOfContactsView.get(indexList).btnEdit.addMouseListener(
 	                    new MouseAdapter() {
 	                        public void mouseReleased(MouseEvent e) {
-	                            //verifyItemsListEdit();
+	                            verifyItemsListEdit();
 	                        }
 	                    });
 	            ++indexList;
@@ -87,7 +87,41 @@ public class MainWindow extends JFrame implements ActionListener {
         }
     }
     
-    
+    private void verifyItemsListEdit(){
+        for(ObjContactWindow objContactWindow : listOfContactsView){
+            boolean edit = objContactWindow.isEdit();
+            if(edit){
+                for(int i=0; i<(indexList); i++){
+                	listOfContactsView.get(i).setEdit(false);
+                }
+                NewContactWindow newContactWindow = new NewContactWindow();
+                newContactWindow.setTitle("Editar contato:");
+                newContactWindow.areaPhone.setText(objContactWindow.getPhone());
+                newContactWindow.areaName.setText(objContactWindow.getName());
+                newContactWindow.btnSalvar.addMouseListener(     
+                		new MouseAdapter() {
+                            public void mouseClicked(MouseEvent e) {
+                                String phoneInsert = newContactWindow.areaPhone.getText();
+                                String nameInsert = newContactWindow.areaName.getText();
+                                    ContactRepository.update(objContactWindow.getIdDB(), new Contact(nameInsert, phoneInsert));
+                                    newContactWindow.dispose();
+                                    updatePainel();
+                                }
+                            }
+                        );
+                newContactWindow.btnCancelar.addMouseListener(
+                        new MouseAdapter() {
+                            public void mouseClicked(MouseEvent e) {
+                                for(int i=0; i<(indexList); i++){
+                                	listOfContactsView.get(i).setEdit(false);
+                                }
+                                newContactWindow.dispose();
+                            }
+                            
+                        });
+            }}
+        }
+   
 	public MainWindow() {
 			updateToDB();
 		    btnAdicionar.setBounds(0,0,100,20);
