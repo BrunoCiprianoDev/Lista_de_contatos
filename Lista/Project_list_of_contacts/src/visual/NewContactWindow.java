@@ -51,14 +51,14 @@ public class NewContactWindow extends JFrame{
 
         MaskFormatter maskNumber = null;
         try {
-            maskNumber = new MaskFormatter("(##)#####-####");
+            maskNumber = new MaskFormatter("(##)####-####");
             maskNumber.setPlaceholderCharacter('_');
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
         areaPhone = new JFormattedTextField(maskNumber);
-        areaPhone.setBounds(65, 50, 80, 20);
+        areaPhone.setBounds(65, 50, 140, 20);
         areaPhone.setBorder(new LineBorder(cinzaClaro, 2));
         areaPhone.setForeground(cinzaFonte);
         areaPhone.setBackground(cinzaClaro);

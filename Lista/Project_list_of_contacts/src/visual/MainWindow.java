@@ -26,7 +26,18 @@ public class MainWindow extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent event){
         if(event.getSource()==btnAdicionar){
-           
+        	NewContactWindow newContactWindow = new NewContactWindow();
+            newContactWindow.btnSalvar.addMouseListener(
+                    new MouseAdapter() {
+                        public void mouseClicked(MouseEvent e) {
+                            String phoneInsert = newContactWindow.areaPhone.getText();
+                            String nameInsert = newContactWindow.areaName.getText();
+                                ContactRepository.save(new Contact(nameInsert, phoneInsert));
+                                newContactWindow.dispose();
+                                updatePainel();
+                            }
+                        }
+                    );
         }
     }
     
