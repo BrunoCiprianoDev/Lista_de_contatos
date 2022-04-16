@@ -10,7 +10,7 @@ public class ConnectionFactory {
 	public static Connection connection() {
 		String url = "jdbc:mysql://localhost:3306/list_of_contacts";
 		String user = "root";
-		String password = "@Rafael2006#";
+		String password = "";
 		try{
 			return DriverManager.getConnection(url, user, password);
 		}catch(SQLException e) {
