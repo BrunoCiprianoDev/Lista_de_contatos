@@ -20,15 +20,15 @@ public class MainWindow extends JFrame implements ActionListener {
 	private JPanel painel = new JPanel();
     private JScrollPane scrollPane;
     private JToolBar header = new JToolBar();
-    private JButton btnAdicionar = new JButton("Adicionar");
+    private JButton btnAdd = new JButton("Adicionar");
 	private List<ObjContactWindow> listOfContactsView = new ArrayList<>();;
     private int indexList=0;
     
     @Override
     public void actionPerformed(ActionEvent event){
-        if(event.getSource()==btnAdicionar){
+        if(event.getSource()==btnAdd){
         	NewContactWindow newContactWindow = new NewContactWindow();
-            newContactWindow.btnSalvar.addMouseListener(
+            newContactWindow.btnSave.addMouseListener(
                     new MouseAdapter() {
                         public void mouseClicked(MouseEvent e) {
                             String phoneInsert = newContactWindow.areaPhone.getText();
@@ -81,7 +81,7 @@ public class MainWindow extends JFrame implements ActionListener {
                     listOfContactsView.get(i).setDelete(false);
                 }
                 DeletePane deletePane = new DeletePane();
-                deletePane.btnConfirmar.addMouseListener(
+                deletePane.btnConfirm.addMouseListener(
                         new MouseAdapter() {
                             public void mouseReleased(MouseEvent e) {
                                 ContactRepository.delete(objContactWindow.getIdDB());
@@ -89,7 +89,7 @@ public class MainWindow extends JFrame implements ActionListener {
                                 updatePainel();
                             }
                         });
-                deletePane.btnNegar.addMouseListener(
+                deletePane.btnDecline.addMouseListener(
                         new MouseAdapter() {
                             public void mouseReleased(MouseEvent e) {
                                 deletePane.dispose();
@@ -111,7 +111,7 @@ public class MainWindow extends JFrame implements ActionListener {
                 newContactWindow.setTitle("Editar contato:");
                 newContactWindow.areaPhone.setText(objContactWindow.getPhone());
                 newContactWindow.areaName.setText(objContactWindow.getName());
-                newContactWindow.btnSalvar.addMouseListener(     
+                newContactWindow.btnSave.addMouseListener(     
                 		new MouseAdapter() {
                             public void mouseClicked(MouseEvent e) {
                                 String phoneInsert = newContactWindow.areaPhone.getText();
@@ -122,7 +122,7 @@ public class MainWindow extends JFrame implements ActionListener {
                                 }
                             }
                         );
-                newContactWindow.btnCancelar.addMouseListener(
+                newContactWindow.btnCancel.addMouseListener(
                         new MouseAdapter() {
                             public void mouseClicked(MouseEvent e) {
                                 for(int i=0; i<(indexList); i++){
@@ -137,18 +137,18 @@ public class MainWindow extends JFrame implements ActionListener {
    
 	public MainWindow() {
 			updateToDB();
-		    btnAdicionar.setBounds(0,0,100,20);
-	        btnAdicionar.setBackground(new Color(105,105,105));
-	        btnAdicionar.setForeground(new Color(220,220,200));
-	        btnAdicionar.setBorderPainted(false);
-	        btnAdicionar.setFocusPainted(false);
-	        btnAdicionar.addActionListener(this);
+		    btnAdd.setBounds(0,0,100,20);
+	        btnAdd.setBackground(new Color(105,105,105));
+	        btnAdd.setForeground(new Color(220,220,200));
+	        btnAdd.setBorderPainted(false);
+	        btnAdd.setFocusPainted(false);
+	        btnAdd.addActionListener(this);
 
 	        header.setBounds(0,0,620,20);
 	        header.setBorder(new LineBorder(new Color(105,105,105), 2));
 	        header.setBackground(new Color(105,105,105));
 	        header.setLayout(null);
-	        header.add(btnAdicionar);
+	        header.add(btnAdd);
 
 	        setLayout(null);
 	        setTitle("Lista de contatos:");

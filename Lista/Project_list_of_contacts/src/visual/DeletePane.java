@@ -10,8 +10,8 @@ public class DeletePane extends JFrame{
     
     private JPanel painel = new JPanel();
     private JLabel labelTexto = new JLabel("Quer mesmo deletar essa tarefa?");
-    protected JButton btnConfirmar  = new JButton("Sim");
-    protected JButton btnNegar  = new JButton("Não");
+    protected JButton btnConfirm  = new JButton("Sim");
+    protected JButton btnDecline  = new JButton("Não");
 
     public DeletePane(){
 
@@ -27,26 +27,26 @@ public class DeletePane extends JFrame{
         labelTexto.setForeground(new Color(220,220,220));
         painel.add(labelTexto);
 
-        btnConfirmar.setBounds(70,105, 100,20);
-        btnConfirmar.setBackground(new Color(105,105,105));
-        btnConfirmar.setForeground( new Color(220,220,220));
-        btnConfirmar.setBorder(new LineBorder(new Color(105,105,105), 2));
-        btnConfirmar.setBorderPainted(false);
-        btnConfirmar.setFocusPainted(false);
-        painel.add(btnConfirmar);
+        btnConfirm.setBounds(70,105, 100,20);
+        btnConfirm.setBackground(new Color(105,105,105));
+        btnConfirm.setForeground( new Color(220,220,220));
+        btnConfirm.setBorder(new LineBorder(new Color(105,105,105), 2));
+        btnConfirm.setBorderPainted(false);
+        btnConfirm.setFocusPainted(false);
+        painel.add(btnConfirm);
 
-        btnNegar.setBounds(220,105, 100,20);
-        btnNegar.setBackground(new Color(105,105,105));
-        btnNegar.setForeground(new Color(220,220,220));
-        btnNegar.setBorder(new LineBorder(new Color(105,105,105), 2));
-        btnNegar.setBorderPainted(false);
-        btnNegar.setFocusPainted(false);
-        painel.add(btnNegar);
+        btnDecline.setBounds(220,105, 100,20);
+        btnDecline.setBackground(new Color(105,105,105));
+        btnDecline.setForeground(new Color(220,220,220));
+        btnDecline.setBorder(new LineBorder(new Color(105,105,105), 2));
+        btnDecline.setBorderPainted(false);
+        btnDecline.setFocusPainted(false);
+        painel.add(btnDecline);
 
         painel.setLayout(null);
         painel.setBounds(0,0,400, 180);
         painel.setBackground(new Color(55,55,55));
-        painel.add(btnConfirmar);
+        painel.add(btnConfirm);
         add(painel);
 
     }

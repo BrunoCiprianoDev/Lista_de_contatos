@@ -55,7 +55,7 @@ public class ObjContactWindow extends JButton implements ActionListener{
 
         labelTitle.setBounds(50,5,450,20);
         labelTitle.setForeground(new Color(220,220,220));
-        labelTitle.setText("("+name+") "+phone);
+        labelTitle.setText(" "+name+": "+phone);
         add(labelTitle);
 
         labelIndex.setBounds(10,5,450,20);

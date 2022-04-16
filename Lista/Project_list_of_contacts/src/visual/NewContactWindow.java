@@ -12,41 +12,38 @@ import java.text.ParseException;
 public class NewContactWindow extends JFrame{
 
     private static final long serialVersionUID = 1L;
-	private Color cinzaEscuro = new Color(55,55,55);
-    private Color cinzaClaro = new Color(105,105,105);
-    private Color cinzaFonte = new Color(220,220,220);
-    private Font fonte = new Font("Roboto", Font.BOLD,15);
+    private Font font = new Font("Roboto", Font.BOLD,15);
     private JPanel painel = new JPanel();
-    private JLabel lbTitulo = new JLabel("Insira uma data e um titulo para a tarefa:");
+    private JLabel lbTitle = new JLabel("Insira uma data e um titulo para a tarefa:");
     protected JTextField areaPhone;
     protected JTextArea areaName = new JTextArea();
-    protected JButton btnSalvar = new JButton("Salvar");
-    protected JButton btnCancelar = new JButton("Cancelar");
+    protected JButton btnSave = new JButton("Salvar");
+    protected JButton btnCancel = new JButton("Cancelar");
 
     public NewContactWindow() {
 
-        btnCancelar.setBounds(300,130,100,20);
-        btnCancelar.setBackground(cinzaClaro);
-        btnCancelar.setForeground(cinzaFonte);
-        btnCancelar.setBorderPainted(false);
-        btnCancelar.setFocusPainted(false);
-        painel.add(btnCancelar);
+        btnCancel.setBounds(300,130,100,20);
+        btnCancel.setBackground(new Color(105,105,105));
+        btnCancel.setForeground(new Color(220,220,220));
+        btnCancel.setBorderPainted(false);
+        btnCancel.setFocusPainted(false);
+        painel.add(btnCancel);
 
-        btnSalvar.setBounds(160,130,100,20);
-        btnSalvar.setBackground(cinzaClaro);
-        btnSalvar.setForeground(cinzaFonte);
-        btnSalvar.setBorderPainted(false);
-        btnSalvar.setFocusPainted(false);
-        painel.add(btnSalvar);
+        btnSave.setBounds(160,130,100,20);
+        btnSave.setBackground(new Color(105,105,105));
+        btnSave.setForeground(new Color(220,220,220));
+        btnSave.setBorderPainted(false);
+        btnSave.setFocusPainted(false);
+        painel.add(btnSave);
 
-        lbTitulo.setBounds(65,20, 400,20);
-        lbTitulo.setForeground(cinzaFonte);
-        painel.add(lbTitulo);
+        lbTitle.setBounds(65,20, 400,20);
+        lbTitle.setForeground(new Color(220,220,220));
+        painel.add(lbTitle);
 
         areaName.setBounds(65, 90, 450, 20);
-        areaName.setForeground(cinzaFonte);
-        areaName.setBackground(cinzaClaro);
-        areaName.setFont(fonte);
+        areaName.setForeground(new Color(220,220,220));
+        areaName.setBackground(new Color(105,105,105));
+        areaName.setFont(font);
         painel.add(areaName);
 
         MaskFormatter maskNumber = null;
@@ -59,13 +56,13 @@ public class NewContactWindow extends JFrame{
 
         areaPhone = new JFormattedTextField(maskNumber);
         areaPhone.setBounds(65, 50, 140, 20);
-        areaPhone.setBorder(new LineBorder(cinzaClaro, 2));
-        areaPhone.setForeground(cinzaFonte);
-        areaPhone.setBackground(cinzaClaro);
-        areaPhone.setFont(fonte);
+        areaPhone.setBorder(new LineBorder(new Color(105,105,105), 2));
+        areaPhone.setForeground(new Color(220,220,220));
+        areaPhone.setBackground(new Color(105,105,105));
+        areaPhone.setFont(font);
         painel.add(areaPhone);
 
-        painel.setBackground(cinzaEscuro);
+        painel.setBackground(new Color(55,55,55));
         painel.setBounds(0, 0, 600, 200);
         painel.setLayout(null);
         add(painel);
@@ -78,7 +75,6 @@ public class NewContactWindow extends JFrame{
         setResizable(false);
 
     }
-
     public NewContactWindow(Contact oldContact){
         new NewContactWindow();
         areaName.setText(oldContact.getName());
