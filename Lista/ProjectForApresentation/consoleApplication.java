@@ -1,8 +1,3 @@
-package test;
-
-import repository.ContactRepository;
-import entities.Contact;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
@@ -10,7 +5,7 @@ import java.util.Scanner;
 public class consoleApplication {
 	public static void runTerminal(Scanner scanner) {
 		int index = 0;
-		List<Contact> listOfContacts = ContactRepository.getAllContacts();
+		List<Contact> listOfContacts = DataBaseSimulator.getAllContacts();
 		Collections.sort(listOfContacts);
 		for(Contact contact : listOfContacts) {
 			System.out.println((++index)+")"+contact.getName()+": "+contact.getPhone());
@@ -50,7 +45,7 @@ public class consoleApplication {
 		String name = scanner.next();
 		System.out.println("Insira o nome do novo contato:(##)####-####");
 		String phone = scanner.next();
-		ContactRepository.save(new Contact(name, phone));
+		DataBaseSimulator.save(new Contact(name, phone));
 	}
 	
 	public static void editContact(Scanner scanner, List<Contact> listOfContacts) {
@@ -69,13 +64,13 @@ public class consoleApplication {
 			System.out.println("Informe o novo nome:");
 			name = scanner.next();
 			contactForEdit.setName(name);
-			ContactRepository.update(contactForEdit.getId(), contactForEdit);
+			DataBaseSimulator.update(contactForEdit.getId(), contactForEdit);
 			break;
 		case 2:
 			System.out.println("Informe o novo telefone:(##)####-####");
 			phone = scanner.next();
 			contactForEdit.setPhone(phone);
-			ContactRepository.update(contactForEdit.getId(), contactForEdit);
+			DataBaseSimulator.update(contactForEdit.getId(), contactForEdit);
 			break;
 		case 3:
 			System.out.println("Informe o novo nome:");
@@ -85,7 +80,7 @@ public class consoleApplication {
 			System.out.println("Informe o novo telefone:(##)####-####");
 			phone = scanner.next();
 			contactForEdit.setPhone(phone);
-			ContactRepository.update(contactForEdit.getId(), contactForEdit);
+			DataBaseSimulator.update(contactForEdit.getId(), contactForEdit);
 			break;
 		default:
 			System.out.println("Opção inválida!");
@@ -95,6 +90,6 @@ public class consoleApplication {
 		System.out.println("Insira o id do contato que deseja deletar:");
 		int id = scanner.nextInt();
 		Contact contactForDelete = listOfContacts.get((id-1));
-		ContactRepository.delete(contactForDelete.getId());
+		DataBaseSimulator.delete(contactForDelete.getId());
 	}
 }
