@@ -1,4 +1,3 @@
-
 import java.util.Objects;
 
 public class Contact implements Comparable<Contact>{

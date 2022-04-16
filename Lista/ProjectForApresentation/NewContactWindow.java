@@ -1,10 +1,6 @@
-package visual;
-
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.text.MaskFormatter;
-
-import entities.Contact;
 
 import java.awt.*;
 import java.text.ParseException;
