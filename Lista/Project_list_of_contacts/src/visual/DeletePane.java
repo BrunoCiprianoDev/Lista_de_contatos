@@ -16,7 +16,7 @@ public class DeletePane extends JFrame{
     public DeletePane(){
 
         setLayout(null);
-        setTitle("Login");
+        setTitle("Deletar contato?");
         setSize(400,180);
         setLocationRelativeTo(null);
         setVisible(true);
