@@ -10,7 +10,9 @@ import java.awt.event.ActionListener;
 public class ObjContactWindow extends JButton implements ActionListener{
 	   
 	    private static final long serialVersionUID = 1L;
-		private JLabel labelTitle = new JLabel();
+	    private ImageIcon imgEdit = new ImageIcon(getClass().getResource("icons/editImage.png"));
+	    private ImageIcon imgDelete = new ImageIcon(getClass().getResource("icons/wasteImage.png"));
+	    private JLabel labelTitle = new JLabel();
 	    private JLabel labelIndex = new JLabel();
 	    protected JButton btnEdit = new JButton();
 	    protected JButton btnDelete = new JButton();
@@ -39,16 +41,16 @@ public class ObjContactWindow extends JButton implements ActionListener{
         this.delete = false;
         this.edit = false;
         
-        btnDelete.setBounds(552,-8,50,50);
-        btnDelete.setText("X");
+        btnDelete.setBounds(550,-1,30,30);
         btnDelete.setBackground(new Color(105,105,105));
+        btnDelete.setIcon(imgDelete);
         btnDelete.setBorderPainted(false);
         btnDelete.addActionListener(this);
         add(btnDelete);
 
         btnEdit.setBounds(500,-9,50,50);
         btnEdit.setBackground(new Color(105,105,105));
-        btnEdit.setText("E");
+        btnEdit.setIcon(imgEdit);
         btnEdit.setBorderPainted(false);
         btnEdit.addActionListener(this);
         add(btnEdit);

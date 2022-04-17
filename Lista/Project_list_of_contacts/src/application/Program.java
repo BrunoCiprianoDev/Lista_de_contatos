@@ -1,8 +1,5 @@
 package application;
 
-//import java.util.List;
-//import entities.Contact;
-
 import visual.MainWindow;
 //import test.consoleApplication;
 //import java.util.Scanner;
