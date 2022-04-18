@@ -2,6 +2,7 @@ package test;
 
 import repository.ContactRepository;
 import entities.Contact;
+import entities.Key;
 
 import java.util.Collections;
 import java.util.List;
@@ -9,8 +10,12 @@ import java.util.Scanner;
 
 public class consoleApplication {
 	public static void runTerminal(Scanner scanner) {
+		System.out.println("Insira a senha de root para o banco de dados:");
+		String keyPass = scanner.next();
+		Key key = new Key("root", keyPass);
+		
 		int index = 0;
-		List<Contact> listOfContacts = ContactRepository.getAllContacts();
+		List<Contact> listOfContacts = ContactRepository.getAllContacts(key);
 		Collections.sort(listOfContacts);
 		for(Contact contact : listOfContacts) {
 			System.out.println((++index)+")"+contact.getName()+": "+contact.getPhone());
@@ -26,13 +31,13 @@ public class consoleApplication {
 		int choice = scanner.nextInt();
 		switch(choice) {
 			case 1:
-				addContact(scanner);	
+				addContact(key, scanner);	
 				break;
 			case 2:
-				editContact(scanner, listOfContacts);
+				editContact(key, scanner, listOfContacts);
 				break;
 			case 3:
-				deleteContact(scanner, listOfContacts);
+				deleteContact(key, scanner, listOfContacts);
 				break;	
 			case 4:
 				System.exit(0);
@@ -45,15 +50,15 @@ public class consoleApplication {
 		runTerminal(scanner);
 	}
 	
-	private static void addContact(Scanner scanner) {
+	private static void addContact(Key key, Scanner scanner) {
 		System.out.println("Insira o nome do novo contato:");
 		String name = scanner.next();
 		System.out.println("Insira o nome do novo contato:(##)####-####");
 		String phone = scanner.next();
-		ContactRepository.save(new Contact(name, phone));
+		ContactRepository.save(key, new Contact(name, phone));
 	}
 	
-	public static void editContact(Scanner scanner, List<Contact> listOfContacts) {
+	public static void editContact(Key key, Scanner scanner, List<Contact> listOfContacts) {
 		String name;
 		String phone;
 		System.out.println("Insira o id do contato que deseja modificar:");
@@ -69,13 +74,13 @@ public class consoleApplication {
 			System.out.println("Informe o novo nome:");
 			name = scanner.next();
 			contactForEdit.setName(name);
-			ContactRepository.update(contactForEdit.getId(), contactForEdit);
+			ContactRepository.update(key, contactForEdit.getId(), contactForEdit);
 			break;
 		case 2:
 			System.out.println("Informe o novo telefone:(##)####-####");
 			phone = scanner.next();
 			contactForEdit.setPhone(phone);
-			ContactRepository.update(contactForEdit.getId(), contactForEdit);
+			ContactRepository.update(key, contactForEdit.getId(), contactForEdit);
 			break;
 		case 3:
 			System.out.println("Informe o novo nome:");
@@ -85,16 +90,16 @@ public class consoleApplication {
 			System.out.println("Informe o novo telefone:(##)####-####");
 			phone = scanner.next();
 			contactForEdit.setPhone(phone);
-			ContactRepository.update(contactForEdit.getId(), contactForEdit);
+			ContactRepository.update(key, contactForEdit.getId(), contactForEdit);
 			break;
 		default:
 			System.out.println("Opção inválida!");
 		}	
 	}	
-	public static void deleteContact(Scanner scanner, List<Contact> listOfContacts) {
+	public static void deleteContact(Key key, Scanner scanner, List<Contact> listOfContacts) {
 		System.out.println("Insira o id do contato que deseja deletar:");
 		int id = scanner.nextInt();
 		Contact contactForDelete = listOfContacts.get((id-1));
-		ContactRepository.delete(contactForDelete.getId());
+		ContactRepository.delete(key, contactForDelete.getId());
 	}
 }

@@ -12,6 +12,7 @@ import entities.Contact;
 import repository.ContactRepository;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import entities.Key;
 
 
 public class MainWindow extends JFrame implements ActionListener {
@@ -23,6 +24,7 @@ public class MainWindow extends JFrame implements ActionListener {
     private JButton btnAdd = new JButton("Adicionar");
 	private List<ObjContactWindow> listOfContactsView = new ArrayList<>();;
     private int indexList=0;
+    private Key key;
     
     @Override
     public void actionPerformed(ActionEvent event){
@@ -33,7 +35,7 @@ public class MainWindow extends JFrame implements ActionListener {
                         public void mouseClicked(MouseEvent e) {
                             String phoneInsert = newContactWindow.areaPhone.getText();
                             String nameInsert = newContactWindow.areaName.getText();
-                                ContactRepository.save(new Contact(nameInsert, phoneInsert));
+                                ContactRepository.save(key, new Contact(nameInsert, phoneInsert));
                                 newContactWindow.dispose();
                                 updatePainel();
                             }
@@ -50,7 +52,7 @@ public class MainWindow extends JFrame implements ActionListener {
     
     private void updateToDB(){
 			indexList=0;
-	        List<Contact> listOfContacts = ContactRepository.getAllContacts();
+	        List<Contact> listOfContacts = ContactRepository.getAllContacts(this.key);
 	        Collections.sort(listOfContacts);
 	        listOfContactsView.clear();
 	        for(Contact contact: listOfContacts){
@@ -84,7 +86,7 @@ public class MainWindow extends JFrame implements ActionListener {
                 deletePane.btnConfirm.addMouseListener(
                         new MouseAdapter() {
                             public void mouseReleased(MouseEvent e) {
-                                ContactRepository.delete(objContactWindow.getIdDB());
+                                ContactRepository.delete(key, objContactWindow.getIdDB());
                                 deletePane.dispose();
                                 updatePainel();
                             }
@@ -116,7 +118,7 @@ public class MainWindow extends JFrame implements ActionListener {
                             public void mouseClicked(MouseEvent e) {
                                 String phoneInsert = newContactWindow.areaPhone.getText();
                                 String nameInsert = newContactWindow.areaName.getText();
-                                    ContactRepository.update(objContactWindow.getIdDB(), new Contact(nameInsert, phoneInsert));
+                                    ContactRepository.update(key, objContactWindow.getIdDB(), new Contact(nameInsert, phoneInsert));
                                     newContactWindow.dispose();
                                     updatePainel();
                                 }
@@ -135,7 +137,8 @@ public class MainWindow extends JFrame implements ActionListener {
             }}
         }
    
-	public MainWindow() {
+	public MainWindow(Key key) {
+			this.key = key;
 			updateToDB();
 		    btnAdd.setBounds(0,0,100,20);
 	        btnAdd.setBackground(new Color(105,105,105));

@@ -2,6 +2,7 @@ package repository;
 
 import connection.ConnectionFactory;
 import entities.Contact;
+import entities.Key;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -14,9 +15,9 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 public class ContactRepository {
-	public static void save(Contact contact) {
+	public static void save(Key key, Contact contact) {
 		 String sql = "INSERT INTO contact (name, phone) VALUES ('"+contact.getName()+"', '"+contact.getPhone()+"')";
-		 Connection connection = ConnectionFactory.connection();
+		 Connection connection = ConnectionFactory.connection(key);
 		 try {
 			 Statement statement = connection.createStatement();
 			 statement.executeLargeUpdate(sql);
@@ -26,9 +27,9 @@ public class ContactRepository {
 			 e.printStackTrace();
 		 }
 	}	 
-	public static List<Contact> getAllContacts(){
+	public static List<Contact> getAllContacts(Key key){
 		String sql = "SELECT id, name, phone FROM contact";
-		Connection connection = ConnectionFactory.connection();
+		Connection connection = ConnectionFactory.connection(key);
 		List<Contact> listOfContacts = new ArrayList<>();
 		try {
 			Statement statement = connection.createStatement();
@@ -44,10 +45,10 @@ public class ContactRepository {
 		}
 		return null;
 	}	
-	public static void update(int id, Contact contact) {
+	public static void update(Key key, int id, Contact contact) {
 		String sql1 = "UPDATE contact SET name = '"+contact.getName()+"' WHERE id = '"+id+"'";	
 		String sql2 = "UPDATE contact SET phone = '"+contact.getPhone()+"' WHERE id = '"+id+"'";
-		Connection connection = ConnectionFactory.connection();
+		Connection connection = ConnectionFactory.connection(key);
 		try {
 			Statement statement = connection.createStatement();
 			statement.executeUpdate(sql1);
@@ -58,9 +59,9 @@ public class ContactRepository {
 			e.printStackTrace();
 		}
 	}	
-	public static void delete(int id) {
+	public static void delete(Key key, int id) {
 		String sql = "DELETE FROM contact WHERE id='"+id+"'";
-		Connection connection = ConnectionFactory.connection();
+		Connection connection = ConnectionFactory.connection(key);
 		try {
 			Statement statement = connection.createStatement();
 			statement.executeUpdate(sql);

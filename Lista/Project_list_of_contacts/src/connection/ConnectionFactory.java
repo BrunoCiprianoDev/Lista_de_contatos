@@ -5,12 +5,13 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import entities.Key;
 
 public class ConnectionFactory {
-	public static Connection connection() {
+	public static Connection connection(Key key) {
 		String url = "jdbc:mysql://localhost:3306/list_of_contacts";
-		String user = "root";
-		String password = "";
+		String user = key.getUser();
+		String password =key.getPassword();
 		try{
 			return DriverManager.getConnection(url, user, password);
 		}catch(SQLException e) {
